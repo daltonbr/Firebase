@@ -1,0 +1,37 @@
+{
+  "client": [
+    {
+      "services": {
+        "appinvite_service": {
+          "status": 0
+        }, 
+        "analytics_service": {
+          "status": 0
+        }
+      }, 
+      "oauth_client": [
+        {
+          "client_id": "191975926719-hn12j7ali942e035p5chnc0hr93emqlt.apps.googleusercontent.com"
+        }
+      ], 
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFUTIH5z3jXNIE55N6EtEPXtYUljO0SAw"
+        }
+      ], 
+      "client_info": {
+        "mobilesdk_app_id": "1:191975926719:ios:9afc9ef86fdf77ae", 
+        "android_client_info": {
+          "package_name": "com.daltonlima.firequest"
+        }
+      }
+    }
+  ], 
+  "configuration_version": "1", 
+  "project_info": {
+    "storage_bucket": "firequest-e340d.appspot.com", 
+    "project_id": "firequest-e340d", 
+    "firebase_url": "https://firequest-e340d.firebaseio.com", 
+    "project_number": "191975926719"
+  }
+}
