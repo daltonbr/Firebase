@@ -7,6 +7,8 @@ Assets/AssetStoreTools*
 
 # Visual Studio code
 temp.sql
+last.sql
+.vscode/
 
 # Visual Studio cache directory
 .vs/
