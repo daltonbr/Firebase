@@ -73,8 +73,14 @@ public class FormManager : MonoBehaviour {
         }
         else if (task.IsCompleted)
         {
-            Firebase.Auth.FirebaseUser newPlayer = task.Result;
-            //Debug.Log("Welcome to FireQuest " + newPlayer.Email);
+            if (operation == "sign_up")
+            {
+                Firebase.Auth.FirebaseUser newPlayer = task.Result;
+                Debug.LogFormat("Welcome to FireQuest {0}", newPlayer.Email);
+
+                Player player = new Player(newPlayer.Email, 0, 1);
+                DatabaseManager.sharedInstance.CreateNewPlayer(player, newPlayer.UserId);
+            }
             UpdateStatus("Loading the game scene");
 
             yield return new WaitForSeconds(1.5f);

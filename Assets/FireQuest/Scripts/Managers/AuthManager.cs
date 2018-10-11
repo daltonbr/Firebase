@@ -25,7 +25,7 @@ public class AuthManager : MonoBehaviour
     {
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
-            StartCoroutine(authCallback(task, "sign-up"));
+            StartCoroutine(authCallback(task, "sign_up"));
         });
     }
 
