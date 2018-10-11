@@ -20,15 +20,18 @@ This course is based initially for a iOS game deployment, but can be easily exte
 
 We need to set some Cocoapods in Xcode in order to use Firebase. So we may need to update our Gem installer for this.
 
-## Intro
-
-We need to download the Firebase SDK and extract the Unity Package into our project.
+## Important initial settings
 
 * We need to set-up a Firebase account
+* Download the Firebase SDK and extract the Unity Packages that we are going to use into our project (authentication and Database)
 * Create our iOS (or other kind of) project inside Firebase
 * Download our **Token** and put it somewhere into our *Assets* folder in Unity.
   * This file contains configuration details such as keys and identifiers, for the services you just enabled.
   * For iOS the file is a called **GoogleService-Info.plist**
-  * In Unity, in `Player Settings` set the `Bundle Identifier` to the same name entered in the Firebase, in this case `com.daltonlima.firequest`
+* In Unity, in `Player Settings`
+  * set the `Bundle Identifier` to the same name entered in the Firebase, in this case `com.daltonlima.firequest`
+  * set the `Scripting Backend` to `.NET 2.0` and **NOT** the .Net 2.0 Subset
 
-The Firebase Documentation is awesome, and is our friend!
+The Firebase [Documentation](https://firebase.google.com/docs) is awesome, and is our friend!
+
+

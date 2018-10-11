@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Firebase;
+using Firebase.Auth;
 
 public class FormManager : MonoBehaviour {
 
@@ -18,14 +21,23 @@ public class FormManager : MonoBehaviour {
 
 	public AuthManager authManager;
 
-	void Awake() {
+	void Awake()
+    {
 		ToggleButtonStates (false);
+
+        // Auth delegate subscriptions
+        authManager.authCallback += HandleAuthCallback;
 	}
 
-	/// <summary>
-	/// Validates the email input
-	/// </summary>
-	public void ValidateEmail() {
+    private void OnDestroy()
+    {
+        authManager.authCallback -= HandleAuthCallback;
+    }
+
+    /// <summary>
+    /// Validates the email input
+    /// </summary>
+    public void ValidateEmail() {
 		string email = emailInput.text;
 		var regexPattern = @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
                 + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
@@ -40,7 +52,9 @@ public class FormManager : MonoBehaviour {
 	}
 
 	// Firebase methods
-	public void OnSignUp() {
+	public void OnSignUp()
+    {
+        authManager.SignUpNewUser(emailInput.text, passwordInput.text);
 		Debug.Log ("Sign Up");
 	}
 
@@ -48,8 +62,13 @@ public class FormManager : MonoBehaviour {
 		Debug.Log ("Login");
 	}
 
-	// Utilities
-	private void ToggleButtonStates(bool toState) {
+    IEnumerator HandleAuthCallback(Task<Firebase.Auth.FirebaseUser> task, string operation)
+    {
+        yield return null;
+    }
+
+    // Utilities
+    private void ToggleButtonStates(bool toState) {
 		signUpButton.interactable = toState;
 		loginButton.interactable = toState;
 	}
