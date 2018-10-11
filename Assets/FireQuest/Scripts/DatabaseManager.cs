@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
 
 public class DatabaseManager : MonoBehaviour {
 
@@ -17,10 +20,11 @@ public class DatabaseManager : MonoBehaviour {
 		}
 
 		DontDestroyOnLoad(gameObject);
+
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://firequest-e340d.firebaseio.com/");
+
+        Debug.Log(Router.Players());
+        //Router.Players().SetValueAsync("testing 1, 2");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }
