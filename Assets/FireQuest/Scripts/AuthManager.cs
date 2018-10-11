@@ -12,6 +12,7 @@ public class AuthManager : MonoBehaviour
     Firebase.Auth.FirebaseAuth auth;
 
     // Delegates
+    // TODO: change the string operation to an enum
     public delegate IEnumerator AuthCallback(Task<Firebase.Auth.FirebaseUser> task, string operation);
     public event AuthCallback authCallback;
 
@@ -24,16 +25,15 @@ public class AuthManager : MonoBehaviour
     {
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
-            if (task.IsFaulted || task.IsCanceled)
-            {
-                Debug.LogError("Sorry, there was an error creating your new account. ERROR: " + task.Exception);
-            }
-            else if (task.IsCompleted)
-            {
-                Firebase.Auth.FirebaseUser newPlayer = task.Result;
-                Debug.Log("Welcome to FireQuest " + newPlayer.Email);
-                //auth.CurrentUser // is another possible way to access our logged user
-            }
+            StartCoroutine(authCallback(task, "sign-up"));
+        });
+    }
+
+    public void LoginExistingUser(string email, string password)
+    {
+        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
+        {
+            StartCoroutine(authCallback(task, "login"));
         });
     }
 

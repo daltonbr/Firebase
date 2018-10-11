@@ -33,5 +33,3 @@ We need to set some Cocoapods in Xcode in order to use Firebase. So we may need 
   * set the `Scripting Backend` to `.NET 2.0` and **NOT** the .Net 2.0 Subset
 
 The Firebase [Documentation](https://firebase.google.com/docs) is awesome, and is our friend!
-
-

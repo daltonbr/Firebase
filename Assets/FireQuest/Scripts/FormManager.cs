@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Auth;
+using UnityEngine.SceneManagement;
 
 public class FormManager : MonoBehaviour {
 
@@ -54,16 +55,31 @@ public class FormManager : MonoBehaviour {
 	// Firebase methods
 	public void OnSignUp()
     {
+        Debug.Log ("Sign Up");
         authManager.SignUpNewUser(emailInput.text, passwordInput.text);
-		Debug.Log ("Sign Up");
 	}
 
 	public void OnLogin() {
 		Debug.Log ("Login");
+        authManager.LoginExistingUser(emailInput.text, passwordInput.text);
 	}
 
     IEnumerator HandleAuthCallback(Task<Firebase.Auth.FirebaseUser> task, string operation)
     {
+        if (task.IsFaulted || task.IsCanceled)
+        {
+            UpdateStatus("Sorry, there was an error creating your new account.");
+            Debug.LogWarning("Sorry, there was an error creating your new account. ERROR: " + task.Exception);
+        }
+        else if (task.IsCompleted)
+        {
+            Firebase.Auth.FirebaseUser newPlayer = task.Result;
+            //Debug.Log("Welcome to FireQuest " + newPlayer.Email);
+            UpdateStatus("Loading the game scene");
+
+            yield return new WaitForSeconds(1.5f);
+            SceneManager.LoadScene("Player List");
+        }
         yield return null;
     }
 
