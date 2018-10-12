@@ -5,6 +5,12 @@ using Firebase;
 using Firebase.Auth;
 using System.Threading.Tasks;
 
+public enum Operation
+{
+    SignUp,
+    Login
+}
+
 public class AuthManager : MonoBehaviour
 {
 
@@ -12,8 +18,7 @@ public class AuthManager : MonoBehaviour
     Firebase.Auth.FirebaseAuth auth;
 
     // Delegates
-    // TODO: change the string operation to an enum
-    public delegate IEnumerator AuthCallback(Task<Firebase.Auth.FirebaseUser> task, string operation);
+    public delegate IEnumerator AuthCallback(Task<Firebase.Auth.FirebaseUser> task, Operation operation);
     public event AuthCallback authCallback;
 
 	void Awake ()
@@ -25,7 +30,7 @@ public class AuthManager : MonoBehaviour
     {
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
-            StartCoroutine(authCallback(task, "sign_up"));
+            StartCoroutine(authCallback(task, Operation.SignUp));
         });
     }
 
@@ -33,7 +38,7 @@ public class AuthManager : MonoBehaviour
     {
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
         {
-            StartCoroutine(authCallback(task, "login"));
+            StartCoroutine(authCallback(task, Operation.Login));
         });
     }
 

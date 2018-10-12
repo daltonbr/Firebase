@@ -64,7 +64,7 @@ public class FormManager : MonoBehaviour
         authManager.LoginExistingUser(emailInput.text, passwordInput.text);
 	}
 
-    IEnumerator HandleAuthCallback(Task<Firebase.Auth.FirebaseUser> task, string operation)
+    IEnumerator HandleAuthCallback(Task<Firebase.Auth.FirebaseUser> task, Operation operation)
     {
         if (task.IsFaulted || task.IsCanceled)
         {
@@ -73,7 +73,7 @@ public class FormManager : MonoBehaviour
         }
         else if (task.IsCompleted)
         {
-            if (operation == "sign_up")
+            if (operation == Operation.SignUp)
             {
                 Firebase.Auth.FirebaseUser newPlayer = task.Result;
                 Debug.LogFormat("Welcome to FireQuest {0}", newPlayer.Email);

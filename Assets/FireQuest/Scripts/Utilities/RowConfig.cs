@@ -17,7 +17,6 @@ public class RowConfig : MonoBehaviour
         this.score.text = player.score.ToString();
         this.email.text = player.email;
         this.level.text = player.level.ToString();
-
         this.profilePic.sprite = imagesList[Random.Range(0, 2)];
     }
 

@@ -57,4 +57,17 @@ The Firebase [Documentation](https://firebase.google.com/docs) is awesome, and i
 - `UpdateChildrenAsync` (only update given nodes, without overriding other fields)
 - `RunTransaction` (for concurrent updates)
 
-## Displaying data
+## Tips for reusing code from this project
+
+- We can create Unity AssetPackages, don't add the Firebase SDK, it's better to always get the latest version from their website.
+    - For a starter pack, include the `Database`, the `AuthManager`, and the `Router`
+- From your Firebase web console, download the appropriate files from your project, and change the project id URL inside `DatabaseManager.cs`
+- Change the nodes names inside `Router.cs` to reflect your data structure
+
+## Upgrades
+
+- Database manager
+    - replacing specific getPlayers method with a more generic get
+- Router class
+    - add convenience constructors for making life easier when you're using filters and queries
+- Firebase docs have lots of another cool features
