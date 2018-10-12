@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase;
 using Firebase.Database;
+using Firebase.Auth;
 
 public class PlayerBoardManager : MonoBehaviour
 {
@@ -10,9 +11,13 @@ public class PlayerBoardManager : MonoBehaviour
 
     public GameObject rowPrefab;
     public GameObject scrollContainer;
+    public GameObject profilePanel;
+
+    Firebase.Auth.FirebaseAuth auth;
 
     private void Awake()
     {
+        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         playerList.Clear();
 
         DatabaseManager.sharedInstance.GetPlayers(result =>
@@ -23,6 +28,7 @@ public class PlayerBoardManager : MonoBehaviour
             InitialiseUI();
         });
 
+        profilePanel.GetComponent<ProfileConfig>().Config(auth.CurrentUser);
         //Router.Players().ChildAdded += NewPlayerAdded;
 
         //Router.Players().OrderByChild("level");
