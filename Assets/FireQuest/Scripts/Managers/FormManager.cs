@@ -81,6 +81,7 @@ public class FormManager : MonoBehaviour {
                 Player player = new Player(newPlayer.Email, 0, 1);
                 DatabaseManager.sharedInstance.CreateNewPlayer(player, newPlayer.UserId);
             }
+
             UpdateStatus("Loading the game scene");
 
             yield return new WaitForSeconds(1.5f);

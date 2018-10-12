@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBoardManager : MonoBehaviour {
+public class PlayerBoardManager : MonoBehaviour
+{
+    public List<Player> playerList = new List<Player>();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void Awake()
+    {
+        playerList.Clear();
+
+        DatabaseManager.sharedInstance.GetPlayers(result =>
+        {
+            playerList = result;
+            Debug.Log(playerList[0].email);
+        });
+    }
 }

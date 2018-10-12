@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using Firebase;
+using Firebase.Database;
 using Firebase.Unity.Editor;
+using System.Collections;
+using System.Collections.Generic;
+using System;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -34,4 +38,21 @@ public class DatabaseManager : MonoBehaviour
         Router.PlayerWIthUID(uid).SetRawJsonValueAsync(playerJSON);
     }
 
+    public void GetPlayers(Action<List<Player>> completionBlock)
+    {
+        List<Player> tempList = new List<Player>();
+        Router.Players().GetValueAsync().ContinueWith(task =>
+        {
+            DataSnapshot players = task.Result;
+
+            foreach (DataSnapshot playerNode in players.Children)
+            {
+                var playerDict = (IDictionary<string, object>) playerNode.Value;
+                Player newPlayer = new Player(playerDict);
+                tempList.Add(newPlayer);
+            }
+
+            completionBlock(tempList);
+        });
+    }
 }
