@@ -11,6 +11,8 @@ public class Player
 
     #endregion
 
+    #region Constructors
+
     public Player(string email, int score, int level)
     {
         this.email = email;
@@ -24,5 +26,7 @@ public class Player
         this.score = Convert.ToInt32(dict["score"]);
         this.level = Convert.ToInt32(dict["level"]);
     }
+
+    #endregion
 
 }

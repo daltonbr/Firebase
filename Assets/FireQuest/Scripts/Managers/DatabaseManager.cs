@@ -10,11 +10,12 @@ public class DatabaseManager : MonoBehaviour
 {
 
 	public static DatabaseManager sharedInstance = null;
+    public string DatabaseURL = "https://firequest-e340d.firebaseio.com/";
 
-	/// <summary>
-	/// Awake this instance and initialize sharedInstance for Singleton pattern
-	/// </summary>
-	void Awake()
+    /// <summary>
+    /// Awake this instance and initialize sharedInstance for Singleton pattern
+    /// </summary>
+    void Awake()
     {
 		if (sharedInstance == null)
         {
@@ -26,7 +27,7 @@ public class DatabaseManager : MonoBehaviour
 
 		DontDestroyOnLoad(gameObject);
 
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://firequest-e340d.firebaseio.com/");
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl(DatabaseURL);
 
         Debug.Log(Router.Players());
         //Router.Players().SetValueAsync("testing 1, 2");

@@ -34,6 +34,27 @@ We need to set some Cocoapods in Xcode in order to use Firebase. So we may need 
 
 The Firebase [Documentation](https://firebase.google.com/docs) is awesome, and is our friend!
 
+[Unity Reference](https://firebase.google.com/docs/reference/unity/)
+
 ## Database
 
 `Firebase.Database.DataSnapshot` is just an iDictionary of key value pairs, corresponding to the JSON structure of our backend.
+
+### Sort and filters
+
+```csharp
+    Router.Players().OrderByChild("level");
+    Router.Players().LimitToFirst(10);
+    // just one filter per query
+    Router.Players().OrderByChild("level").LimitToLast(5);
+```
+
+### Different write methods
+
+- `SetRawJsonValueAsync`
+- `SetValueAsync`
+- `Push`
+- `UpdateChildrenAsync` (only update given nodes, without overriding other fields)
+- `RunTransaction` (for concurrent updates)
+
+## Displaying data
