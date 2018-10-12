@@ -42,6 +42,7 @@ public class PlayerBoardManager : MonoBehaviour
     void CreateRow(Player player)
     {
         GameObject newRow = Instantiate(rowPrefab as GameObject);
+        newRow.GetComponent<RowConfig>().Initialise(player);
         newRow.transform.SetParent(scrollContainer.transform, false);
     }
 
